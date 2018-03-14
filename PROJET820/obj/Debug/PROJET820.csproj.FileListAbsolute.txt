@@ -1,0 +1,12 @@
+C:\Users\Dell\source\repos\PROJET820\PROJET820\bin\Debug\PROJET820.exe.config
+C:\Users\Dell\source\repos\PROJET820\PROJET820\bin\Debug\PROJET820.exe
+C:\Users\Dell\source\repos\PROJET820\PROJET820\bin\Debug\PROJET820.pdb
+C:\Users\Dell\source\repos\PROJET820\PROJET820\bin\Debug\Oracle.ManagedDataAccess.dll
+C:\Users\Dell\source\repos\PROJET820\PROJET820\bin\Debug\Oracle.ManagedDataAccess.EntityFramework.dll
+C:\Users\Dell\source\repos\PROJET820\PROJET820\obj\Debug\PROJET820.csprojResolveAssemblyReference.cache
+C:\Users\Dell\source\repos\PROJET820\PROJET820\obj\Debug\PROJET820.Form1.resources
+C:\Users\Dell\source\repos\PROJET820\PROJET820\obj\Debug\PROJET820.Properties.Resources.resources
+C:\Users\Dell\source\repos\PROJET820\PROJET820\obj\Debug\PROJET820.csproj.GenerateResource.Cache
+C:\Users\Dell\source\repos\PROJET820\PROJET820\obj\Debug\PROJET820.csproj.CoreCompileInputs.cache
+C:\Users\Dell\source\repos\PROJET820\PROJET820\obj\Debug\PROJET820.exe
+C:\Users\Dell\source\repos\PROJET820\PROJET820\obj\Debug\PROJET820.pdb
