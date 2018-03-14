@@ -30,8 +30,10 @@ namespace PROJET820
 
             // si successs
                 connexion = true;
-                //CHARGER LE MODELE DE LA BDD
+            //CHARGER LE MODELE DE LA BDD
             //else
+
+            MessageBox.Show("Incorrect Login or password");
 
         }
 
@@ -39,20 +41,35 @@ namespace PROJET820
         {
             // Check Credentials Here  
 
-            if ((connexion) && (tabControl.SelectedTab == tabForm))
-            {
-                //tabControl.SelectedTab = tabForm;
-            }
-            else
+            if (!connexion)
             {
                 MessageBox.Show("Unable to load tab. You have insufficient access privileges.");
                 tabControl.SelectedTab = tabLogin;
             }
         }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        private void cbCOMMAND_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            foreach (Control c in tabForm.Controls)
+            {
+                if (c is Panel)
+                    c.Visible = false;
+            }
+            switch (cbCOMMAND.SelectedIndex)
+            {
+                case 0:
+                    panelCREATE.Visible = true;
+                    break;
+                case 1:
+                    panelDELETE.Visible = true;
+                    break;
+                case 2:
+                    panelINSERT.Visible = true;
+                    break;
+                case 3:
+                    panelSELECT.Visible = true;
+                    break;
+            }
         }
 
         private void tabForm_Click(object sender, EventArgs e)

@@ -30,19 +30,33 @@
         {
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabLogin = new System.Windows.Forms.TabPage();
-            this.tabForm = new System.Windows.Forms.TabPage();
-            this.tbLogin = new System.Windows.Forms.TextBox();
-            this.tbPassword = new System.Windows.Forms.TextBox();
-            this.labLogin = new System.Windows.Forms.Label();
-            this.labPassword = new System.Windows.Forms.Label();
             this.btnConnection = new System.Windows.Forms.Button();
+            this.labPassword = new System.Windows.Forms.Label();
+            this.labLogin = new System.Windows.Forms.Label();
+            this.tbPassword = new System.Windows.Forms.TextBox();
+            this.tbLogin = new System.Windows.Forms.TextBox();
+            this.tabForm = new System.Windows.Forms.TabPage();
+            this.panelSELECT = new System.Windows.Forms.Panel();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.lbTable = new System.Windows.Forms.ListBox();
+            this.clbAttribute = new System.Windows.Forms.CheckedListBox();
             this.cbCOMMAND = new System.Windows.Forms.ComboBox();
-            this.layoutCreate = new System.Windows.Forms.FlowLayoutPanel();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.panelDELETE = new System.Windows.Forms.Panel();
+            this.lbTable2 = new System.Windows.Forms.ListBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.cbDeleteWhole = new System.Windows.Forms.CheckBox();
+            this.panelCREATE = new System.Windows.Forms.Panel();
+            this.la = new System.Windows.Forms.Label();
+            this.panelINSERT = new System.Windows.Forms.Panel();
+            this.label4 = new System.Windows.Forms.Label();
             this.tabControl.SuspendLayout();
             this.tabLogin.SuspendLayout();
             this.tabForm.SuspendLayout();
-            this.layoutCreate.SuspendLayout();
+            this.panelSELECT.SuspendLayout();
+            this.panelDELETE.SuspendLayout();
+            this.panelCREATE.SuspendLayout();
+            this.panelINSERT.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl
@@ -71,9 +85,55 @@
             this.tabLogin.Text = "Login";
             this.tabLogin.UseVisualStyleBackColor = true;
             // 
+            // btnConnection
+            // 
+            this.btnConnection.Location = new System.Drawing.Point(38, 153);
+            this.btnConnection.Name = "btnConnection";
+            this.btnConnection.Size = new System.Drawing.Size(75, 23);
+            this.btnConnection.TabIndex = 4;
+            this.btnConnection.Text = "Connexion";
+            this.btnConnection.UseVisualStyleBackColor = true;
+            this.btnConnection.Click += new System.EventHandler(this.btnConnection_Click);
+            // 
+            // labPassword
+            // 
+            this.labPassword.AutoSize = true;
+            this.labPassword.Location = new System.Drawing.Point(7, 104);
+            this.labPassword.Name = "labPassword";
+            this.labPassword.Size = new System.Drawing.Size(58, 13);
+            this.labPassword.TabIndex = 3;
+            this.labPassword.Text = "password :";
+            // 
+            // labLogin
+            // 
+            this.labLogin.AutoSize = true;
+            this.labLogin.Location = new System.Drawing.Point(7, 27);
+            this.labLogin.Name = "labLogin";
+            this.labLogin.Size = new System.Drawing.Size(35, 13);
+            this.labLogin.TabIndex = 2;
+            this.labLogin.Text = "login :";
+            // 
+            // tbPassword
+            // 
+            this.tbPassword.Location = new System.Drawing.Point(89, 101);
+            this.tbPassword.Name = "tbPassword";
+            this.tbPassword.PasswordChar = '*';
+            this.tbPassword.Size = new System.Drawing.Size(100, 20);
+            this.tbPassword.TabIndex = 1;
+            // 
+            // tbLogin
+            // 
+            this.tbLogin.Location = new System.Drawing.Point(89, 24);
+            this.tbLogin.Name = "tbLogin";
+            this.tbLogin.Size = new System.Drawing.Size(100, 20);
+            this.tbLogin.TabIndex = 0;
+            // 
             // tabForm
             // 
-            this.tabForm.Controls.Add(this.layoutCreate);
+            this.tabForm.Controls.Add(this.panelINSERT);
+            this.tabForm.Controls.Add(this.panelCREATE);
+            this.tabForm.Controls.Add(this.panelDELETE);
+            this.tabForm.Controls.Add(this.panelSELECT);
             this.tabForm.Controls.Add(this.cbCOMMAND);
             this.tabForm.Location = new System.Drawing.Point(4, 22);
             this.tabForm.Name = "tabForm";
@@ -84,48 +144,51 @@
             this.tabForm.UseVisualStyleBackColor = true;
             this.tabForm.Click += new System.EventHandler(this.tabForm_Click);
             // 
-            // tbLogin
+            // panelSELECT
             // 
-            this.tbLogin.Location = new System.Drawing.Point(395, 101);
-            this.tbLogin.Name = "tbLogin";
-            this.tbLogin.Size = new System.Drawing.Size(100, 20);
-            this.tbLogin.TabIndex = 0;
+            this.panelSELECT.Controls.Add(this.label2);
+            this.panelSELECT.Controls.Add(this.label1);
+            this.panelSELECT.Controls.Add(this.lbTable);
+            this.panelSELECT.Controls.Add(this.clbAttribute);
+            this.panelSELECT.Location = new System.Drawing.Point(6, 42);
+            this.panelSELECT.Name = "panelSELECT";
+            this.panelSELECT.Size = new System.Drawing.Size(348, 318);
+            this.panelSELECT.TabIndex = 2;
+            this.panelSELECT.Visible = false;
             // 
-            // tbPassword
+            // label2
             // 
-            this.tbPassword.Location = new System.Drawing.Point(338, 201);
-            this.tbPassword.Name = "tbPassword";
-            this.tbPassword.PasswordChar = '*';
-            this.tbPassword.Size = new System.Drawing.Size(100, 20);
-            this.tbPassword.TabIndex = 1;
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(11, 158);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(75, 13);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "ATTRIBUTES";
             // 
-            // labLogin
+            // label1
             // 
-            this.labLogin.AutoSize = true;
-            this.labLogin.Location = new System.Drawing.Point(273, 101);
-            this.labLogin.Name = "labLogin";
-            this.labLogin.Size = new System.Drawing.Size(35, 13);
-            this.labLogin.TabIndex = 2;
-            this.labLogin.Text = "login :";
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(46, 53);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(41, 13);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "TABLE";
             // 
-            // labPassword
+            // lbTable
             // 
-            this.labPassword.AutoSize = true;
-            this.labPassword.Location = new System.Drawing.Point(216, 204);
-            this.labPassword.Name = "labPassword";
-            this.labPassword.Size = new System.Drawing.Size(58, 13);
-            this.labPassword.TabIndex = 3;
-            this.labPassword.Text = "password :";
+            this.lbTable.FormattingEnabled = true;
+            this.lbTable.Location = new System.Drawing.Point(93, 15);
+            this.lbTable.Name = "lbTable";
+            this.lbTable.Size = new System.Drawing.Size(120, 95);
+            this.lbTable.TabIndex = 1;
             // 
-            // btnConnection
+            // clbAttribute
             // 
-            this.btnConnection.Location = new System.Drawing.Point(448, 316);
-            this.btnConnection.Name = "btnConnection";
-            this.btnConnection.Size = new System.Drawing.Size(75, 23);
-            this.btnConnection.TabIndex = 4;
-            this.btnConnection.Text = "Connexion";
-            this.btnConnection.UseVisualStyleBackColor = true;
-            this.btnConnection.Click += new System.EventHandler(this.btnConnection_Click);
+            this.clbAttribute.FormattingEnabled = true;
+            this.clbAttribute.Location = new System.Drawing.Point(92, 116);
+            this.clbAttribute.Name = "clbAttribute";
+            this.clbAttribute.Size = new System.Drawing.Size(120, 94);
+            this.clbAttribute.TabIndex = 0;
             // 
             // cbCOMMAND
             // 
@@ -139,22 +202,81 @@
             this.cbCOMMAND.Name = "cbCOMMAND";
             this.cbCOMMAND.Size = new System.Drawing.Size(121, 21);
             this.cbCOMMAND.TabIndex = 1;
-            this.cbCOMMAND.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            this.cbCOMMAND.SelectedIndexChanged += new System.EventHandler(this.cbCOMMAND_SelectedIndexChanged);
             // 
-            // layoutCreate
+            // panelDELETE
             // 
-            this.layoutCreate.Controls.Add(this.textBox1);
-            this.layoutCreate.Location = new System.Drawing.Point(19, 55);
-            this.layoutCreate.Name = "layoutCreate";
-            this.layoutCreate.Size = new System.Drawing.Size(751, 343);
-            this.layoutCreate.TabIndex = 2;
+            this.panelDELETE.Controls.Add(this.cbDeleteWhole);
+            this.panelDELETE.Controls.Add(this.label3);
+            this.panelDELETE.Controls.Add(this.lbTable2);
+            this.panelDELETE.Location = new System.Drawing.Point(173, 42);
+            this.panelDELETE.Name = "panelDELETE";
+            this.panelDELETE.Size = new System.Drawing.Size(306, 286);
+            this.panelDELETE.TabIndex = 3;
+            this.panelDELETE.Visible = false;
             // 
-            // textBox1
+            // lbTable2
             // 
-            this.textBox1.Location = new System.Drawing.Point(3, 3);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 0;
+            this.lbTable2.FormattingEnabled = true;
+            this.lbTable2.Location = new System.Drawing.Point(86, 15);
+            this.lbTable2.Name = "lbTable2";
+            this.lbTable2.Size = new System.Drawing.Size(120, 95);
+            this.lbTable2.TabIndex = 2;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(39, 53);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(41, 13);
+            this.label3.TabIndex = 3;
+            this.label3.Text = "TABLE";
+            // 
+            // cbDeleteWhole
+            // 
+            this.cbDeleteWhole.AutoSize = true;
+            this.cbDeleteWhole.Location = new System.Drawing.Point(86, 117);
+            this.cbDeleteWhole.Name = "cbDeleteWhole";
+            this.cbDeleteWhole.Size = new System.Drawing.Size(114, 17);
+            this.cbDeleteWhole.TabIndex = 4;
+            this.cbDeleteWhole.Text = "Delete whole table";
+            this.cbDeleteWhole.UseVisualStyleBackColor = true;
+            // 
+            // panelCREATE
+            // 
+            this.panelCREATE.Controls.Add(this.la);
+            this.panelCREATE.Location = new System.Drawing.Point(485, 6);
+            this.panelCREATE.Name = "panelCREATE";
+            this.panelCREATE.Size = new System.Drawing.Size(235, 322);
+            this.panelCREATE.TabIndex = 4;
+            this.panelCREATE.Visible = false;
+            // 
+            // la
+            // 
+            this.la.AutoSize = true;
+            this.la.Location = new System.Drawing.Point(29, 36);
+            this.la.Name = "la";
+            this.la.Size = new System.Drawing.Size(50, 13);
+            this.la.TabIndex = 0;
+            this.la.Text = "CREATE";
+            // 
+            // panelINSERT
+            // 
+            this.panelINSERT.Controls.Add(this.label4);
+            this.panelINSERT.Location = new System.Drawing.Point(429, 346);
+            this.panelINSERT.Name = "panelINSERT";
+            this.panelINSERT.Size = new System.Drawing.Size(235, 322);
+            this.panelINSERT.TabIndex = 5;
+            this.panelINSERT.Visible = false;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(29, 36);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(47, 13);
+            this.label4.TabIndex = 0;
+            this.label4.Text = "INSERT";
             // 
             // Form1
             // 
@@ -169,8 +291,14 @@
             this.tabLogin.ResumeLayout(false);
             this.tabLogin.PerformLayout();
             this.tabForm.ResumeLayout(false);
-            this.layoutCreate.ResumeLayout(false);
-            this.layoutCreate.PerformLayout();
+            this.panelSELECT.ResumeLayout(false);
+            this.panelSELECT.PerformLayout();
+            this.panelDELETE.ResumeLayout(false);
+            this.panelDELETE.PerformLayout();
+            this.panelCREATE.ResumeLayout(false);
+            this.panelCREATE.PerformLayout();
+            this.panelINSERT.ResumeLayout(false);
+            this.panelINSERT.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -186,8 +314,19 @@
         private System.Windows.Forms.TabPage tabForm;
         private System.Windows.Forms.Button btnConnection;
         private System.Windows.Forms.ComboBox cbCOMMAND;
-        private System.Windows.Forms.FlowLayoutPanel layoutCreate;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Panel panelSELECT;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ListBox lbTable;
+        private System.Windows.Forms.CheckedListBox clbAttribute;
+        private System.Windows.Forms.Panel panelDELETE;
+        private System.Windows.Forms.CheckBox cbDeleteWhole;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ListBox lbTable2;
+        private System.Windows.Forms.Panel panelINSERT;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Panel panelCREATE;
+        private System.Windows.Forms.Label la;
     }
 }
 
