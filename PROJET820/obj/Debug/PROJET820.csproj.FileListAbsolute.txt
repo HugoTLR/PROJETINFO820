@@ -22,3 +22,4 @@ C:\Users\Dell\source\repos\PROJETINFO820\PROJET820\obj\Debug\PROJET820.csproj.Ge
 C:\Users\Dell\source\repos\PROJETINFO820\PROJET820\obj\Debug\PROJET820.csproj.CoreCompileInputs.cache
 C:\Users\Dell\source\repos\PROJETINFO820\PROJET820\obj\Debug\PROJET820.exe
 C:\Users\Dell\source\repos\PROJETINFO820\PROJET820\obj\Debug\PROJET820.pdb
+C:\Users\Dell\Source\Repos\PROJETINFO820\PROJET820\obj\Debug\PROJET820.csproj.CopyComplete

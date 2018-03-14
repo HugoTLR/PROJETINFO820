@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Oracle.ManagedDataAccess.Client;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -14,6 +15,10 @@ namespace PROJET820
     {
 
         public bool connexion { get; protected set; }
+        private string host;
+
+        public List<string> tableName { get; protected set; }
+
         public Form1()
         {
             InitializeComponent();
@@ -24,17 +29,44 @@ namespace PROJET820
             string log = tbLogin.Text;
             string pw = tbPassword.Text;
 
+            string oradb = "Data Source=(DESCRIPTION="
+                + "(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=" + host + ")(PORT=1521)))"
+                + "(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=XE)));"
+                + "User Id=" + log + ";Password=" + pw + ";";
 
+            OracleConnection conn = new OracleConnection(oradb);
+            try
+            {
+                conn.Open();
 
-            //FAIRE LA CO ICI
-
-            // si successs
                 connexion = true;
-            //CHARGER LE MODELE DE LA BDD
-            //else
+            }
+            catch(Exception ex)// Intercepte toutes les exceptions
+            {
+                MessageBox.Show(ex.Message.ToString());
+            }
+            
+            if (connexion)
+            {
+                MessageBox.Show("Connexion Successfull");
+                LoadDBStruct(conn);
 
-            MessageBox.Show("Incorrect Login or password");
+                //Charger le modele ici
+            }
+        }
 
+        private void LoadDBStruct(OracleConnection conn)
+        {
+            OracleCommand cmd = new OracleCommand();
+            cmd.Connection = conn;
+            cmd.CommandText = "select table_name FROM user_tables";
+            cmd.CommandType = CommandType.Text;
+
+            OracleDataReader dr = cmd.ExecuteReader();
+            while (dr.Read())
+            {
+                tableName.Add(dr.GetString(0));// changer de structure plus tard
+            }
         }
 
         private void tabControl_SelectedIndexChanged(object sender, System.EventArgs e)
@@ -67,8 +99,17 @@ namespace PROJET820
                     panelINSERT.Visible = true;
                     break;
                 case 3:
+                    InitSelectPanel();
                     panelSELECT.Visible = true;
                     break;
+            }
+        }
+
+        private void InitSelectPanel()
+        {
+            foreach(string s in tableName)
+            {
+                lbTable.Items.Add(s);
             }
         }
 
@@ -79,7 +120,9 @@ namespace PROJET820
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            cbCOMMAND.SelectedIndex = 3;
+            host = "XX.XXX.XXX.XXX";
+            tableName = new List<string>();
+            cbCOMMAND.SelectedIndex = 1;
         }
     }
 }
