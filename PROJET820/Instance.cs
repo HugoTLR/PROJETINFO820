@@ -9,11 +9,11 @@ namespace PROJET820
     class Instance
     {
 
-        public List<Table> TablesList { get; protected set; }
+        public Dictionary<string,Table> TablesList { get; protected set; }
 
         public Instance()
         {
-            TablesList = new List<Table>();
+            TablesList = new Dictionary<string, Table>();
         }
     }
 }

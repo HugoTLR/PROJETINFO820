@@ -58,21 +58,30 @@ namespace PROJET820
         {
             OracleCommand cmd = new OracleCommand();
             cmd.Connection = conn;
-            cmd.CommandText = "select table_name FROM user_tables";
+            cmd.CommandText = "select table_name,column_id,column_name,data_type FROM user_tab_columns";
             cmd.CommandType = CommandType.Text;
 
             
             OracleDataReader dr = cmd.ExecuteReader();
+
+            string t = "";
             while (dr.Read())
             {
+                if(t != dr.GetString(0))
+                {
+                    dataInstance.TablesList.Add(dr.GetString(0),new Table(dr.GetString(0)));
+                    t = dr.GetString(0);
+                }
+                Attribute a = (dr.GetInt16(1) == 1) ? new Attribute(dr.GetString(2), dr.GetString(3), true) : new Attribute(dr.GetString(2), dr.GetString(3));
 
-                dataInstance.TablesList.Add(new Table(dr.GetString(0)));
+                dataInstance.TablesList[t].AddAttribute(a);
             }
 
+            /*
             for(int i = 0; i < dataInstance.TablesList.Count; i++)
             {
                 string name = dataInstance.TablesList.ElementAt(i).Name;
-                cmd.CommandText = "show COLUMNS FROM" + name;
+                cmd.CommandText = "SHOW COLUMNS FROM " + name + ";";
 
                 cmd.CommandType = CommandType.Text;
                 dr = cmd.ExecuteReader();
@@ -82,7 +91,7 @@ namespace PROJET820
                     ///// recuperation des attributs de chaque table ici
                 }
 
-            }
+            }*/
         }
 
         private void tabControl_SelectedIndexChanged(object sender, System.EventArgs e)
@@ -123,9 +132,9 @@ namespace PROJET820
 
         private void InitSelectPanel()
         {
-            foreach(Table t in dataInstance.TablesList)
+            for(int i = 0; i < dataInstance.TablesList.Count;i++)
             {
-                lbTable.Items.Add(t.Name);
+                lbTable.Items.Add(dataInstance.TablesList.ElementAt(i).Value.Name);
             }
         }
 
@@ -143,10 +152,10 @@ namespace PROJET820
         private void lbTable_SelectedIndexChanged(object sender, EventArgs e)
         {
             clbAttribute.Items.Clear();
-            Table t = dataInstance.TablesList.ElementAt(lbTable.SelectedIndex);
-            for (int i = 0; i < t.AttrList.Count; i++)
+            KeyValuePair<string,Table> t= dataInstance.TablesList.ElementAt(lbTable.SelectedIndex);
+            for (int i = 0; i < t.Value.AttrList.Count; i++)
             {
-                clbAttribute.Items.Add(t.AttrList.ElementAt(i));
+                clbAttribute.Items.Add(t.Value.AttrList.ElementAt(i).Name);
             }
 
         }
@@ -158,11 +167,12 @@ namespace PROJET820
 
         private void AskOracle()
         {
-            string tname = lbTable.SelectedValue.ToString();
+            string tname = lbTable.SelectedItem.ToString();
             List<string> attr = new List<string>();
-            foreach(Control c in clbAttribute.SelectedItems)
+            for(int i = 0; i < clbAttribute.Items.Count; i++)
             {
-                attr.Add(c.Text);
+                if(clbAttribute.GetItemChecked(i))
+                    attr.Add(clbAttribute.GetItemText(clbAttribute.Items[i]));
             }
 
             OracleCommand cmd = new OracleCommand();
@@ -170,9 +180,9 @@ namespace PROJET820
             cmd.CommandText = "select ";
             for(int i = 0; i <  attr.Count; i++)
             {
-                cmd.CommandText += (i == attr.Count) ? attr.ElementAt(i) : attr.ElementAt(i) + ",";
+                cmd.CommandText += (i == attr.Count-1) ? attr.ElementAt(i) : attr.ElementAt(i) + ",";
             }
-            cmd.CommandText += " FROM " + tname + ";";
+            cmd.CommandText += " FROM " + tname;
             cmd.CommandType = CommandType.Text;
 
             OracleDataReader dr = cmd.ExecuteReader();
@@ -192,12 +202,17 @@ namespace PROJET820
                 layoutReponse.RowStyles.Add(new RowStyle(SizeType.Absolute, 50F));
                 for (int i = 0; i < attr.Count; i++)
                 {
-                    layoutReponse.Controls.Add(new Label() { Text = dr.GetString(i) }, i, layoutReponse.RowCount - 1);
-                }
-                //dataInstance.TablesList.ElementAt(i).AddAttribute(new Attribute("eeeee", "eeeee"));
-                ///// recuperation des attributs de chaque table ici
-            }
+                    if(dataInstance.TablesList[tname].AttrList.ElementAt(i).Type == "NUMBER")
+                        layoutReponse.Controls.Add(new Label() { Text = dr.GetInt16(i).ToString() }, i, layoutReponse.RowCount - 1);
+                    else
 
+                        layoutReponse.Controls.Add(new Label() { Text = dr.GetString(i) }, i, layoutReponse.RowCount - 1);
+                }
+            }
+        }
+
+        private void layoutReponse_Paint(object sender, PaintEventArgs e)
+        {
 
         }
     }

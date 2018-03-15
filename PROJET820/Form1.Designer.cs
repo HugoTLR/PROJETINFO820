@@ -328,15 +328,18 @@
             // 
             // layoutReponse
             // 
+            this.layoutReponse.AutoScroll = true;
             this.layoutReponse.ColumnCount = 2;
             this.layoutReponse.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.layoutReponse.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.layoutReponse.Location = new System.Drawing.Point(7, 6);
+            this.layoutReponse.MaximumSize = new System.Drawing.Size(760, 350);
             this.layoutReponse.Name = "layoutReponse";
             this.layoutReponse.RowCount = 1;
             this.layoutReponse.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.layoutReponse.Size = new System.Drawing.Size(474, 248);
+            this.layoutReponse.Size = new System.Drawing.Size(760, 350);
             this.layoutReponse.TabIndex = 0;
+            this.layoutReponse.Paint += new System.Windows.Forms.PaintEventHandler(this.layoutReponse_Paint);
             // 
             // Form1
             // 
