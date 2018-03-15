@@ -14,10 +14,10 @@ namespace PROJET820
     public partial class Form1 : Form
     {
 
+        public OracleConnection conn { get; protected set; }
         public bool connexion { get; protected set; }
-        private string host;
 
-        public List<Table> tableName { get; protected set; }
+        private Instance dataInstance;
 
         public Form1()
         {
@@ -28,13 +28,13 @@ namespace PROJET820
         {
             string log = tbLogin.Text;
             string pw = tbPassword.Text;
-
+            string host = tbIP.Text;
             string oradb = "Data Source=(DESCRIPTION="
                 + "(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=" + host + ")(PORT=1521)))"
                 + "(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=XE)));"
                 + "User Id=" + log + ";Password=" + pw + ";";
 
-            OracleConnection conn = new OracleConnection(oradb);
+            conn = new OracleConnection(oradb);
             try
             {
                 conn.Open();
@@ -67,19 +67,19 @@ namespace PROJET820
             while (dr.Read())
             {
 
-                tableName.Add(new Table(dr.GetString(0)));// changer de structure plus tard
+                dataInstance.TablesList.Add(new Table(dr.GetString(0)));
             }
 
-            for(int i = 0; i < tableName.Count; i++)
+            for(int i = 0; i < dataInstance.TablesList.Count; i++)
             {
-                string name = tableName.ElementAt(i).Name;
+                string name = dataInstance.TablesList.ElementAt(i).Name;
                 cmd.CommandText = "show COLUMNS FROM" + name;
 
                 cmd.CommandType = CommandType.Text;
                 dr = cmd.ExecuteReader();
                 while(dr.Read())
                 {
-                    tableName.ElementAt(i).AddAttribute(new Attribute("eeeee", "eeeee"));
+                    dataInstance.TablesList.ElementAt(i).AddAttribute(new Attribute("eeeee", "eeeee"));
                     ///// recuperation des attributs de chaque table ici
                 }
 
@@ -124,9 +124,9 @@ namespace PROJET820
 
         private void InitSelectPanel()
         {
-            foreach(string s in tableName)
+            foreach(Table t in dataInstance.TablesList)
             {
-                lbTable.Items.Add(s);
+                lbTable.Items.Add(t.Name);
             }
         }
 
@@ -137,9 +137,36 @@ namespace PROJET820
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            host = "XX.XXX.XXX.XXX";
-            tableName = new List<string>();
+            dataInstance = new Instance();
             cbCOMMAND.SelectedIndex = 1;
+        }
+
+        private void lbTable_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            clbAttribute.Items.Clear();
+            Table t = dataInstance.TablesList.ElementAt(lbTable.SelectedIndex);
+            for (int i = 0; i < t.AttrList.Count; i++)
+            {
+                clbAttribute.Items.Add(t.AttrList.ElementAt(i));
+            }
+
+        }
+
+        private void btnSelect_Click(object sender, EventArgs e)
+        {
+            AskOracle();
+        }
+
+        private void AskOracle()
+        {
+            string tname = lbTable.SelectedValue.ToString();
+            List<string> attr = new List<string>();
+            foreach(Control c in clbAttribute.SelectedItems)
+            {
+                attr.Add(c.Text);
+            }
+
+
         }
     }
 }
