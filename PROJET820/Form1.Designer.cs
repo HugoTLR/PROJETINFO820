@@ -30,6 +30,8 @@
         {
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabLogin = new System.Windows.Forms.TabPage();
+            this.label5 = new System.Windows.Forms.Label();
+            this.tbIP = new System.Windows.Forms.TextBox();
             this.btnConnection = new System.Windows.Forms.Button();
             this.labPassword = new System.Windows.Forms.Label();
             this.labLogin = new System.Windows.Forms.Label();
@@ -45,14 +47,14 @@
             this.label3 = new System.Windows.Forms.Label();
             this.lbTable2 = new System.Windows.Forms.ListBox();
             this.panelSELECT = new System.Windows.Forms.Panel();
+            this.btnSelect = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.lbTable = new System.Windows.Forms.ListBox();
             this.clbAttribute = new System.Windows.Forms.CheckedListBox();
             this.cbCOMMAND = new System.Windows.Forms.ComboBox();
-            this.tbIP = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.btnSelect = new System.Windows.Forms.Button();
+            this.tabReponse = new System.Windows.Forms.TabPage();
+            this.layoutReponse = new System.Windows.Forms.TableLayoutPanel();
             this.tabControl.SuspendLayout();
             this.tabLogin.SuspendLayout();
             this.tabForm.SuspendLayout();
@@ -60,12 +62,14 @@
             this.panelCREATE.SuspendLayout();
             this.panelDELETE.SuspendLayout();
             this.panelSELECT.SuspendLayout();
+            this.tabReponse.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl
             // 
             this.tabControl.Controls.Add(this.tabLogin);
             this.tabControl.Controls.Add(this.tabForm);
+            this.tabControl.Controls.Add(this.tabReponse);
             this.tabControl.Location = new System.Drawing.Point(1, 2);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
@@ -89,6 +93,22 @@
             this.tabLogin.TabIndex = 0;
             this.tabLogin.Text = "Login";
             this.tabLogin.UseVisualStyleBackColor = true;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(212, 62);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(70, 13);
+            this.label5.TabIndex = 6;
+            this.label5.Text = "IP SERVER :";
+            // 
+            // tbIP
+            // 
+            this.tbIP.Location = new System.Drawing.Point(288, 59);
+            this.tbIP.Name = "tbIP";
+            this.tbIP.Size = new System.Drawing.Size(100, 20);
+            this.tbIP.TabIndex = 5;
             // 
             // btnConnection
             // 
@@ -236,6 +256,16 @@
             this.panelSELECT.TabIndex = 2;
             this.panelSELECT.Visible = false;
             // 
+            // btnSelect
+            // 
+            this.btnSelect.Location = new System.Drawing.Point(32, 252);
+            this.btnSelect.Name = "btnSelect";
+            this.btnSelect.Size = new System.Drawing.Size(75, 23);
+            this.btnSelect.TabIndex = 4;
+            this.btnSelect.Text = "SELECT";
+            this.btnSelect.UseVisualStyleBackColor = true;
+            this.btnSelect.Click += new System.EventHandler(this.btnSelect_Click);
+            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -285,31 +315,28 @@
             this.cbCOMMAND.TabIndex = 1;
             this.cbCOMMAND.SelectedIndexChanged += new System.EventHandler(this.cbCOMMAND_SelectedIndexChanged);
             // 
-            // tbIP
+            // tabReponse
             // 
-            this.tbIP.Location = new System.Drawing.Point(288, 59);
-            this.tbIP.Name = "tbIP";
-            this.tbIP.Size = new System.Drawing.Size(100, 20);
-            this.tbIP.TabIndex = 5;
+            this.tabReponse.Controls.Add(this.layoutReponse);
+            this.tabReponse.Location = new System.Drawing.Point(4, 22);
+            this.tabReponse.Name = "tabReponse";
+            this.tabReponse.Padding = new System.Windows.Forms.Padding(3);
+            this.tabReponse.Size = new System.Drawing.Size(776, 422);
+            this.tabReponse.TabIndex = 2;
+            this.tabReponse.Text = "Reponse";
+            this.tabReponse.UseVisualStyleBackColor = true;
             // 
-            // label5
+            // layoutReponse
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(212, 62);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(70, 13);
-            this.label5.TabIndex = 6;
-            this.label5.Text = "IP SERVER :";
-            // 
-            // btnSelect
-            // 
-            this.btnSelect.Location = new System.Drawing.Point(32, 252);
-            this.btnSelect.Name = "btnSelect";
-            this.btnSelect.Size = new System.Drawing.Size(75, 23);
-            this.btnSelect.TabIndex = 4;
-            this.btnSelect.Text = "SELECT";
-            this.btnSelect.UseVisualStyleBackColor = true;
-            this.btnSelect.Click += new System.EventHandler(this.btnSelect_Click);
+            this.layoutReponse.ColumnCount = 2;
+            this.layoutReponse.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.layoutReponse.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.layoutReponse.Location = new System.Drawing.Point(7, 6);
+            this.layoutReponse.Name = "layoutReponse";
+            this.layoutReponse.RowCount = 1;
+            this.layoutReponse.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.layoutReponse.Size = new System.Drawing.Size(474, 248);
+            this.layoutReponse.TabIndex = 0;
             // 
             // Form1
             // 
@@ -332,6 +359,7 @@
             this.panelDELETE.PerformLayout();
             this.panelSELECT.ResumeLayout(false);
             this.panelSELECT.PerformLayout();
+            this.tabReponse.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -363,6 +391,8 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox tbIP;
         private System.Windows.Forms.Button btnSelect;
+        private System.Windows.Forms.TabPage tabReponse;
+        private System.Windows.Forms.TableLayoutPanel layoutReponse;
     }
 }
 

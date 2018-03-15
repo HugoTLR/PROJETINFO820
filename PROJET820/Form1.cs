@@ -16,7 +16,6 @@ namespace PROJET820
 
         public OracleConnection conn { get; protected set; }
         public bool connexion { get; protected set; }
-
         private Instance dataInstance;
 
         public Form1()
@@ -90,7 +89,7 @@ namespace PROJET820
         {
             // Check Credentials Here  
 
-            if (!connexion)
+            if (!connexion && tabControl.SelectedTab != tabLogin)
             {
                 MessageBox.Show("Unable to load tab. You have insufficient access privileges.");
                 tabControl.SelectedTab = tabLogin;
@@ -164,6 +163,39 @@ namespace PROJET820
             foreach(Control c in clbAttribute.SelectedItems)
             {
                 attr.Add(c.Text);
+            }
+
+            OracleCommand cmd = new OracleCommand();
+            cmd.Connection = conn;
+            cmd.CommandText = "select ";
+            for(int i = 0; i <  attr.Count; i++)
+            {
+                cmd.CommandText += (i == attr.Count) ? attr.ElementAt(i) : attr.ElementAt(i) + ",";
+            }
+            cmd.CommandText += " FROM " + tname + ";";
+            cmd.CommandType = CommandType.Text;
+
+            OracleDataReader dr = cmd.ExecuteReader();
+
+
+            layoutReponse.ColumnCount = attr.Count;
+            for(int i = 0; i < attr.Count; i++)
+            {
+                layoutReponse.Controls.Add(new Label() { Text = attr.ElementAt(i) }, i, 0);
+            }
+
+            int cpt = layoutReponse.RowCount;            
+            while (dr.Read())
+            {
+
+                layoutReponse.RowCount = layoutReponse.RowCount + 1;
+                layoutReponse.RowStyles.Add(new RowStyle(SizeType.Absolute, 50F));
+                for (int i = 0; i < attr.Count; i++)
+                {
+                    layoutReponse.Controls.Add(new Label() { Text = dr.GetString(i) }, i, layoutReponse.RowCount - 1);
+                }
+                //dataInstance.TablesList.ElementAt(i).AddAttribute(new Attribute("eeeee", "eeeee"));
+                ///// recuperation des attributs de chaque table ici
             }
 
 
