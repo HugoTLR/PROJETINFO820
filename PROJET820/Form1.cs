@@ -17,7 +17,7 @@ namespace PROJET820
         public bool connexion { get; protected set; }
         private string host;
 
-        public List<string> tableName { get; protected set; }
+        public List<Table> tableName { get; protected set; }
 
         public Form1()
         {
@@ -62,10 +62,27 @@ namespace PROJET820
             cmd.CommandText = "select table_name FROM user_tables";
             cmd.CommandType = CommandType.Text;
 
+            
             OracleDataReader dr = cmd.ExecuteReader();
             while (dr.Read())
             {
-                tableName.Add(dr.GetString(0));// changer de structure plus tard
+
+                tableName.Add(new Table(dr.GetString(0)));// changer de structure plus tard
+            }
+
+            for(int i = 0; i < tableName.Count; i++)
+            {
+                string name = tableName.ElementAt(i).Name;
+                cmd.CommandText = "show COLUMNS FROM" + name;
+
+                cmd.CommandType = CommandType.Text;
+                dr = cmd.ExecuteReader();
+                while(dr.Read())
+                {
+                    tableName.ElementAt(i).AddAttribute(new Attribute("eeeee", "eeeee"));
+                    ///// recuperation des attributs de chaque table ici
+                }
+
             }
         }
 
