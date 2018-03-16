@@ -162,6 +162,10 @@ namespace PROJET820
 
         private void btnSelect_Click(object sender, EventArgs e)
         {
+            layoutReponse.Controls.Clear();
+            layoutReponse.RowStyles.Clear();
+            layoutReponse.ColumnStyles.Clear();;
+            layoutReponse.RowCount = 1;
             AskOracle();
         }
 
@@ -199,13 +203,17 @@ namespace PROJET820
             {
 
                 layoutReponse.RowCount = layoutReponse.RowCount + 1;
-                layoutReponse.RowStyles.Add(new RowStyle(SizeType.Absolute, 50F));
+                //layoutReponse.RowStyles.Add(new RowStyle(SizeType.Absolute, 50F));
                 for (int i = 0; i < attr.Count; i++)
                 {
-                    if(dataInstance.TablesList[tname].AttrList.ElementAt(i).Type == "NUMBER")
-                        layoutReponse.Controls.Add(new Label() { Text = dr.GetInt16(i).ToString() }, i, layoutReponse.RowCount - 1);
+                    string type = dataInstance.TablesList[tname].AttrList.ElementAt(i).Type;
+                    if(dr.IsDBNull(i))
+                        layoutReponse.Controls.Add(new Label() { Text = "NULL" }, i, layoutReponse.RowCount - 1);
+                    else if (type == "NUMBER")
+                        layoutReponse.Controls.Add(new Label() { Text = dr.GetInt32(i).ToString() }, i, layoutReponse.RowCount - 1);
+                    else if(type == "DATE")
+                        layoutReponse.Controls.Add(new Label() { Text = dr.GetDateTime(i).ToString() }, i, layoutReponse.RowCount - 1);
                     else
-
                         layoutReponse.Controls.Add(new Label() { Text = dr.GetString(i) }, i, layoutReponse.RowCount - 1);
                 }
             }
@@ -214,6 +222,90 @@ namespace PROJET820
         private void layoutReponse_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void tbNbAttr_TextChanged(object sender, EventArgs e)
+        {
+            panelCREATEattr.Controls.Clear();
+            if (tbNbAttr.Text != "" && IsAllDigits(tbNbAttr.Text))
+            {
+                for(int i = 0; i < int.Parse(tbNbAttr.Text);i++)
+                {
+                    TextBox attrName = new TextBox();
+                    attrName.SetBounds(0, 0 + i * 50, 75, 30);
+                    attrName.Text = "aa";
+                    ComboBox attrType = new ComboBox();
+                    attrType.Items.Add("NUMBER");
+
+                    attrType.Items.Add("DATE");
+                    attrType.Items.Add("VARCHAR");
+                    attrType.SetBounds(100, 0 + i * 50, 75, 30);
+                    panelCREATEattr.Controls.Add(attrName);
+                    panelCREATEattr.Controls.Add(attrType);
+
+                }
+            }
+        }
+
+        private bool IsAllDigits(string s)
+        {
+            foreach(char c in s)
+            {
+                if (!char.IsDigit(c))
+                    return false;
+            }
+            return true;
+        }
+
+        private void btnCreate_Click(object sender, EventArgs e)
+        {
+            FeedOracle();
+        }
+
+        //CREATE
+        private void FeedOracle()
+        {
+
+            OracleCommand cmd = new OracleCommand();
+            cmd.Connection = conn;
+            cmd.CommandText = "CREATE TABLE " + tbCreate.Text + "(";
+            int nbArg = int.Parse(tbNbAttr.Text);
+            bool isattr = false;
+            int cpt = 1;
+            string res = "";
+
+            foreach (Control c in panelCREATEattr.Controls)
+            {
+                if (!isattr)
+                    res += c.Text + " ";
+                else
+                {
+                    if(c.Text == "VARCHAR")
+                        res += (cpt/2 == nbArg) ? c.Text + "(30))" : c.Text + "(30),";
+                    else
+                        res += (cpt/2 == nbArg) ? c.Text + ")" : c.Text + ",";
+
+
+
+                }
+                cpt++;
+                isattr = !isattr;
+            }
+            cmd.CommandText += res;
+            cmd.CommandType = CommandType.Text;
+
+            OracleDataReader dr = cmd.ExecuteReader();
+
+            try
+            {
+                while (dr.Read())
+                    Console.WriteLine(dr.GetValue(0));
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+            MessageBox.Show("Table Successfully Created");
         }
     }
 }

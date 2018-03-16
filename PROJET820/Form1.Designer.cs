@@ -55,6 +55,12 @@
             this.cbCOMMAND = new System.Windows.Forms.ComboBox();
             this.tabReponse = new System.Windows.Forms.TabPage();
             this.layoutReponse = new System.Windows.Forms.TableLayoutPanel();
+            this.tbCreate = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.tbNbAttr = new System.Windows.Forms.TextBox();
+            this.panelCREATEattr = new System.Windows.Forms.Panel();
+            this.btnCreate = new System.Windows.Forms.Button();
             this.tabControl.SuspendLayout();
             this.tabLogin.SuspendLayout();
             this.tabForm.SuspendLayout();
@@ -189,6 +195,12 @@
             // 
             // panelCREATE
             // 
+            this.panelCREATE.Controls.Add(this.btnCreate);
+            this.panelCREATE.Controls.Add(this.panelCREATEattr);
+            this.panelCREATE.Controls.Add(this.tbNbAttr);
+            this.panelCREATE.Controls.Add(this.label7);
+            this.panelCREATE.Controls.Add(this.label6);
+            this.panelCREATE.Controls.Add(this.tbCreate);
             this.panelCREATE.Controls.Add(this.la);
             this.panelCREATE.Location = new System.Drawing.Point(485, 6);
             this.panelCREATE.Name = "panelCREATE";
@@ -341,6 +353,57 @@
             this.layoutReponse.TabIndex = 0;
             this.layoutReponse.Paint += new System.Windows.Forms.PaintEventHandler(this.layoutReponse_Paint);
             // 
+            // tbCreate
+            // 
+            this.tbCreate.Location = new System.Drawing.Point(85, 75);
+            this.tbCreate.Name = "tbCreate";
+            this.tbCreate.Size = new System.Drawing.Size(100, 20);
+            this.tbCreate.TabIndex = 1;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(4, 78);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(75, 13);
+            this.label6.TabIndex = 2;
+            this.label6.Text = "TABLE NAME";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(7, 120);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(54, 13);
+            this.label7.TabIndex = 3;
+            this.label7.Text = "NB ATTR";
+            // 
+            // tbNbAttr
+            // 
+            this.tbNbAttr.Location = new System.Drawing.Point(85, 112);
+            this.tbNbAttr.Name = "tbNbAttr";
+            this.tbNbAttr.Size = new System.Drawing.Size(100, 20);
+            this.tbNbAttr.TabIndex = 4;
+            this.tbNbAttr.TextChanged += new System.EventHandler(this.tbNbAttr_TextChanged);
+            // 
+            // panelCREATEattr
+            // 
+            this.panelCREATEattr.AutoScroll = true;
+            this.panelCREATEattr.Location = new System.Drawing.Point(7, 137);
+            this.panelCREATEattr.Name = "panelCREATEattr";
+            this.panelCREATEattr.Size = new System.Drawing.Size(225, 157);
+            this.panelCREATEattr.TabIndex = 5;
+            // 
+            // btnCreate
+            // 
+            this.btnCreate.Location = new System.Drawing.Point(104, 296);
+            this.btnCreate.Name = "btnCreate";
+            this.btnCreate.Size = new System.Drawing.Size(75, 23);
+            this.btnCreate.TabIndex = 5;
+            this.btnCreate.Text = "CREATE";
+            this.btnCreate.UseVisualStyleBackColor = true;
+            this.btnCreate.Click += new System.EventHandler(this.btnCreate_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -396,6 +459,12 @@
         private System.Windows.Forms.Button btnSelect;
         private System.Windows.Forms.TabPage tabReponse;
         private System.Windows.Forms.TableLayoutPanel layoutReponse;
+        private System.Windows.Forms.TextBox tbNbAttr;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox tbCreate;
+        private System.Windows.Forms.Panel panelCREATEattr;
+        private System.Windows.Forms.Button btnCreate;
     }
 }
 
