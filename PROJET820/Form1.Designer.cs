@@ -68,6 +68,7 @@
             this.cbINSERT = new System.Windows.Forms.ComboBox();
             this.btnINSERT = new System.Windows.Forms.Button();
             this.panelINSERTAttr = new System.Windows.Forms.Panel();
+            this.cbSELECT = new System.Windows.Forms.CheckBox();
             this.tabControl.SuspendLayout();
             this.tabLogin.SuspendLayout();
             this.tabForm.SuspendLayout();
@@ -111,7 +112,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(212, 62);
+            this.label5.Location = new System.Drawing.Point(6, 100);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(70, 13);
             this.label5.TabIndex = 6;
@@ -119,11 +120,10 @@
             // 
             // tbIP
             // 
-            this.tbIP.Location = new System.Drawing.Point(288, 59);
+            this.tbIP.Location = new System.Drawing.Point(89, 97);
             this.tbIP.Name = "tbIP";
             this.tbIP.Size = new System.Drawing.Size(100, 20);
             this.tbIP.TabIndex = 5;
-            this.tbIP.Text = "78.211.246.211";
             // 
             // btnConnection
             // 
@@ -138,7 +138,7 @@
             // labPassword
             // 
             this.labPassword.AutoSize = true;
-            this.labPassword.Location = new System.Drawing.Point(7, 104);
+            this.labPassword.Location = new System.Drawing.Point(7, 65);
             this.labPassword.Name = "labPassword";
             this.labPassword.Size = new System.Drawing.Size(58, 13);
             this.labPassword.TabIndex = 3;
@@ -155,7 +155,7 @@
             // 
             // tbPassword
             // 
-            this.tbPassword.Location = new System.Drawing.Point(89, 101);
+            this.tbPassword.Location = new System.Drawing.Point(89, 62);
             this.tbPassword.Name = "tbPassword";
             this.tbPassword.PasswordChar = '*';
             this.tbPassword.Size = new System.Drawing.Size(100, 20);
@@ -188,6 +188,7 @@
             // 
             // panelSELECT
             // 
+            this.panelSELECT.Controls.Add(this.cbSELECT);
             this.panelSELECT.Controls.Add(this.btnSelect);
             this.panelSELECT.Controls.Add(this.label2);
             this.panelSELECT.Controls.Add(this.label1);
@@ -425,7 +426,7 @@
             "CREATE",
             "DELETE",
             "INSERT"});
-            this.cbCOMMAND.Location = new System.Drawing.Point(98, 6);
+            this.cbCOMMAND.Location = new System.Drawing.Point(373, 13);
             this.cbCOMMAND.Name = "cbCOMMAND";
             this.cbCOMMAND.Size = new System.Drawing.Size(121, 21);
             this.cbCOMMAND.TabIndex = 1;
@@ -437,7 +438,7 @@
             this.tabReponse.Location = new System.Drawing.Point(4, 22);
             this.tabReponse.Name = "tabReponse";
             this.tabReponse.Padding = new System.Windows.Forms.Padding(3);
-            this.tabReponse.Size = new System.Drawing.Size(776, 422);
+            this.tabReponse.Size = new System.Drawing.Size(864, 422);
             this.tabReponse.TabIndex = 2;
             this.tabReponse.Text = "Reponse";
             this.tabReponse.UseVisualStyleBackColor = true;
@@ -449,7 +450,7 @@
             this.layoutReponse.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.layoutReponse.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.layoutReponse.Location = new System.Drawing.Point(7, 6);
-            this.layoutReponse.MaximumSize = new System.Drawing.Size(760, 350);
+            this.layoutReponse.MaximumSize = new System.Drawing.Size(864, 350);
             this.layoutReponse.Name = "layoutReponse";
             this.layoutReponse.RowCount = 1;
             this.layoutReponse.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -483,6 +484,17 @@
             this.panelINSERTAttr.Name = "panelINSERTAttr";
             this.panelINSERTAttr.Size = new System.Drawing.Size(212, 157);
             this.panelINSERTAttr.TabIndex = 9;
+            // 
+            // cbSELECT
+            // 
+            this.cbSELECT.AutoSize = true;
+            this.cbSELECT.Location = new System.Drawing.Point(44, 281);
+            this.cbSELECT.Name = "cbSELECT";
+            this.cbSELECT.Size = new System.Drawing.Size(113, 17);
+            this.cbSELECT.TabIndex = 5;
+            this.cbSELECT.Text = "Select whole table";
+            this.cbSELECT.UseVisualStyleBackColor = true;
+            this.cbSELECT.CheckedChanged += new System.EventHandler(this.cbSELECT_CheckedChanged);
             // 
             // Form1
             // 
@@ -554,6 +566,7 @@
         private System.Windows.Forms.Button btnINSERT;
         private System.Windows.Forms.ComboBox cbINSERT;
         private System.Windows.Forms.Panel panelINSERTAttr;
+        private System.Windows.Forms.CheckBox cbSELECT;
     }
 }
 

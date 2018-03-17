@@ -458,5 +458,18 @@ namespace PROJET820
             }
             MessageBox.Show("Insert successful");
         }
+
+        private void cbSELECT_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbSELECT.Checked)
+            {
+                for (int i = 0; i < clbAttribute.Items.Count; i++)
+                    clbAttribute.SetItemChecked(i, true);
+            }else
+            {
+                for (int i = 0; i < clbAttribute.Items.Count; i++)
+                    clbAttribute.SetItemChecked(i, false);
+            }
+        }
     }
 }
