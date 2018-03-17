@@ -115,19 +115,28 @@ namespace PROJET820
             switch (cbCOMMAND.SelectedIndex)
             {
                 case 0:
-                    panelCREATE.Visible = true;
-                    break;
-                case 1:
-                    InitDeletePanel();
-                    panelDELETE.Visible = true;
-                    break;
-                case 2:
-                    panelINSERT.Visible = true;
-                    break;
-                case 3:
                     InitSelectPanel();
                     panelSELECT.Visible = true;
                     break;
+                case 1:
+                    panelCREATE.Visible = true;
+                    break;
+                case 2:
+                    InitDeletePanel();
+                    panelDELETE.Visible = true;
+                    break;
+                case 3:
+                    InitInsertPanel();
+                    panelINSERT.Visible = true;
+                    break;
+            }
+        }
+
+        private void InitInsertPanel()
+        {
+            for (int i = 0; i < dataInstance.TablesList.Count; i++)
+            {
+                cbINSERT.Items.Add(dataInstance.TablesList.ElementAt(i).Value.Name);
             }
         }
         
@@ -155,7 +164,7 @@ namespace PROJET820
         private void Form1_Load(object sender, EventArgs e)
         {
             dataInstance = new Instance();
-            cbCOMMAND.SelectedIndex = 1;
+            cbCOMMAND.SelectedIndex = 0;
         }
 
         private void lbTable_SelectedIndexChanged(object sender, EventArgs e)
@@ -207,25 +216,36 @@ namespace PROJET820
                 layoutReponse.Controls.Add(new Label() { Text = attr.ElementAt(i) }, i, 0);
             }
 
-            int cpt = layoutReponse.RowCount;            
-            while (dr.Read())
+            int cpt = layoutReponse.RowCount;
+            try
             {
-
-                layoutReponse.RowCount = layoutReponse.RowCount + 1;
-                //layoutReponse.RowStyles.Add(new RowStyle(SizeType.Absolute, 50F));
-                for (int i = 0; i < attr.Count; i++)
+                while (dr.Read())
                 {
-                    string type = dataInstance.TablesList[tname].AttrList.ElementAt(i).Type;
-                    if(dr.IsDBNull(i))
-                        layoutReponse.Controls.Add(new Label() { Text = "NULL" }, i, layoutReponse.RowCount - 1);
-                    else if (type == "NUMBER")
-                        layoutReponse.Controls.Add(new Label() { Text = dr.GetInt32(i).ToString() }, i, layoutReponse.RowCount - 1);
-                    else if(type == "DATE")
-                        layoutReponse.Controls.Add(new Label() { Text = dr.GetDateTime(i).ToString() }, i, layoutReponse.RowCount - 1);
-                    else
-                        layoutReponse.Controls.Add(new Label() { Text = dr.GetString(i) }, i, layoutReponse.RowCount - 1);
+
+                    layoutReponse.RowCount = layoutReponse.RowCount + 1;
+                    //layoutReponse.RowStyles.Add(new RowStyle(SizeType.Absolute, 50F));
+                    for (int i = 0; i < attr.Count; i++)
+                    {
+                        string type = dataInstance.TablesList[tname].AttrList.ElementAt(i).Type;
+                        if (dr.IsDBNull(i))
+                            layoutReponse.Controls.Add(new Label() { Text = "NULL" }, i, layoutReponse.RowCount - 1);
+                        else if (type == "NUMBER")
+                            layoutReponse.Controls.Add(new Label() { Text = dr.GetInt32(i).ToString() }, i, layoutReponse.RowCount - 1);
+                        else if (type == "DATE")
+                            layoutReponse.Controls.Add(new Label() { Text = dr.GetDateTime(i).ToString() }, i, layoutReponse.RowCount - 1);
+                        else
+                            layoutReponse.Controls.Add(new Label() { Text = dr.GetString(i) }, i, layoutReponse.RowCount - 1);
+                    }
                 }
             }
+            catch(Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+
+            MessageBox.Show("Select successful. See response page");
+            
+
         }
 
         private void layoutReponse_Paint(object sender, PaintEventArgs e)
@@ -369,6 +389,74 @@ namespace PROJET820
             {
                 panelDeleteWhere.Show();
             }
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+        
+        }
+
+        private void cbINSERT_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            panelINSERTAttr.Controls.Clear();
+            KeyValuePair<string, Table> t = dataInstance.TablesList.ElementAt(cbINSERT.SelectedIndex);
+            for (int i = 0; i < t.Value.AttrList.Count; i++)
+            {
+
+                Label attrName = new Label();
+                attrName.SetBounds(0, 0 + i * 50, 75, 30);
+                attrName.Text = t.Value.AttrList[i].Name;
+                TextBox attrType = new TextBox();
+              
+                attrType.SetBounds(100, 0 + i * 50, 75, 30);
+                panelINSERTAttr.Controls.Add(attrName);
+                panelINSERTAttr.Controls.Add(attrType);
+            }
+        }
+
+        private void btnINSERT_Click(object sender, EventArgs e)
+        {
+            FeedTable();
+        }
+
+        private void FeedTable()
+        {
+            OracleCommand cmd = new OracleCommand();
+            cmd.Connection = conn;
+            cmd.CommandText = "INSERT INTO " + cbINSERT.Text + " VALUES(";
+
+            int cpt = 0;
+            string type = "";
+            foreach (Control c in panelINSERTAttr.Controls)
+            {
+                if (c is Label)
+                    type = dataInstance.TablesList[cbINSERT.Text].AttrList[cpt].Type;
+                else if (c is TextBox)
+                {
+                    if(type.Contains("VARCH"))
+                        cmd.CommandText += (cpt != dataInstance.TablesList[cbINSERT.Text].AttrList.Count - 1) ? "'"+c.Text + "'," : "'"+c.Text + "')";
+                    else
+                        cmd.CommandText += (cpt != dataInstance.TablesList[cbINSERT.Text].AttrList.Count - 1) ? c.Text + "," : c.Text + ")";
+                    cpt++;
+                }
+            }
+
+
+            cmd.CommandType = CommandType.Text;
+
+            OracleDataReader dr = cmd.ExecuteReader();
+
+            try
+            {
+                //Useless
+                while (dr.Read())
+                    Console.WriteLine(dr.GetValue(0));
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+            MessageBox.Show("Insert successful");
         }
     }
 }
