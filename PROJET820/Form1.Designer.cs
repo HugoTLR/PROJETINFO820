@@ -41,6 +41,12 @@
             this.panelINSERT = new System.Windows.Forms.Panel();
             this.label4 = new System.Windows.Forms.Label();
             this.panelCREATE = new System.Windows.Forms.Panel();
+            this.btnCreate = new System.Windows.Forms.Button();
+            this.panelCREATEattr = new System.Windows.Forms.Panel();
+            this.tbNbAttr = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.tbCreate = new System.Windows.Forms.TextBox();
             this.la = new System.Windows.Forms.Label();
             this.panelDELETE = new System.Windows.Forms.Panel();
             this.cbDeleteWhole = new System.Windows.Forms.CheckBox();
@@ -55,12 +61,10 @@
             this.cbCOMMAND = new System.Windows.Forms.ComboBox();
             this.tabReponse = new System.Windows.Forms.TabPage();
             this.layoutReponse = new System.Windows.Forms.TableLayoutPanel();
-            this.tbCreate = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.tbNbAttr = new System.Windows.Forms.TextBox();
-            this.panelCREATEattr = new System.Windows.Forms.Panel();
-            this.btnCreate = new System.Windows.Forms.Button();
+            this.btnDelete = new System.Windows.Forms.Button();
+            this.cbDeleteWhere = new System.Windows.Forms.ComboBox();
+            this.tbDeleteWhere = new System.Windows.Forms.TextBox();
+            this.panelDeleteWhere = new System.Windows.Forms.Panel();
             this.tabControl.SuspendLayout();
             this.tabLogin.SuspendLayout();
             this.tabForm.SuspendLayout();
@@ -69,6 +73,7 @@
             this.panelDELETE.SuspendLayout();
             this.panelSELECT.SuspendLayout();
             this.tabReponse.SuspendLayout();
+            this.panelDeleteWhere.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl
@@ -208,6 +213,57 @@
             this.panelCREATE.TabIndex = 4;
             this.panelCREATE.Visible = false;
             // 
+            // btnCreate
+            // 
+            this.btnCreate.Location = new System.Drawing.Point(104, 296);
+            this.btnCreate.Name = "btnCreate";
+            this.btnCreate.Size = new System.Drawing.Size(75, 23);
+            this.btnCreate.TabIndex = 5;
+            this.btnCreate.Text = "CREATE";
+            this.btnCreate.UseVisualStyleBackColor = true;
+            this.btnCreate.Click += new System.EventHandler(this.btnCreate_Click);
+            // 
+            // panelCREATEattr
+            // 
+            this.panelCREATEattr.AutoScroll = true;
+            this.panelCREATEattr.Location = new System.Drawing.Point(7, 137);
+            this.panelCREATEattr.Name = "panelCREATEattr";
+            this.panelCREATEattr.Size = new System.Drawing.Size(225, 157);
+            this.panelCREATEattr.TabIndex = 5;
+            // 
+            // tbNbAttr
+            // 
+            this.tbNbAttr.Location = new System.Drawing.Point(85, 112);
+            this.tbNbAttr.Name = "tbNbAttr";
+            this.tbNbAttr.Size = new System.Drawing.Size(100, 20);
+            this.tbNbAttr.TabIndex = 4;
+            this.tbNbAttr.TextChanged += new System.EventHandler(this.tbNbAttr_TextChanged);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(7, 120);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(54, 13);
+            this.label7.TabIndex = 3;
+            this.label7.Text = "NB ATTR";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(4, 78);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(75, 13);
+            this.label6.TabIndex = 2;
+            this.label6.Text = "TABLE NAME";
+            // 
+            // tbCreate
+            // 
+            this.tbCreate.Location = new System.Drawing.Point(85, 75);
+            this.tbCreate.Name = "tbCreate";
+            this.tbCreate.Size = new System.Drawing.Size(100, 20);
+            this.tbCreate.TabIndex = 1;
+            // 
             // la
             // 
             this.la.AutoSize = true;
@@ -219,6 +275,8 @@
             // 
             // panelDELETE
             // 
+            this.panelDELETE.Controls.Add(this.panelDeleteWhere);
+            this.panelDELETE.Controls.Add(this.btnDelete);
             this.panelDELETE.Controls.Add(this.cbDeleteWhole);
             this.panelDELETE.Controls.Add(this.label3);
             this.panelDELETE.Controls.Add(this.lbTable2);
@@ -237,6 +295,7 @@
             this.cbDeleteWhole.TabIndex = 4;
             this.cbDeleteWhole.Text = "Delete whole table";
             this.cbDeleteWhole.UseVisualStyleBackColor = true;
+            this.cbDeleteWhole.CheckedChanged += new System.EventHandler(this.cbDeleteWhole_CheckedChanged);
             // 
             // label3
             // 
@@ -254,6 +313,7 @@
             this.lbTable2.Name = "lbTable2";
             this.lbTable2.Size = new System.Drawing.Size(120, 95);
             this.lbTable2.TabIndex = 2;
+            this.lbTable2.SelectedIndexChanged += new System.EventHandler(this.lbTable2_SelectedIndexChanged);
             // 
             // panelSELECT
             // 
@@ -353,56 +413,44 @@
             this.layoutReponse.TabIndex = 0;
             this.layoutReponse.Paint += new System.Windows.Forms.PaintEventHandler(this.layoutReponse_Paint);
             // 
-            // tbCreate
+            // btnDelete
             // 
-            this.tbCreate.Location = new System.Drawing.Point(85, 75);
-            this.tbCreate.Name = "tbCreate";
-            this.tbCreate.Size = new System.Drawing.Size(100, 20);
-            this.tbCreate.TabIndex = 1;
+            this.btnDelete.Location = new System.Drawing.Point(103, 252);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(75, 23);
+            this.btnDelete.TabIndex = 6;
+            this.btnDelete.Text = "DELETE";
+            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
-            // label6
+            // cbDeleteWhere
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(4, 78);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(75, 13);
-            this.label6.TabIndex = 2;
-            this.label6.Text = "TABLE NAME";
+            this.cbDeleteWhere.FormattingEnabled = true;
+            this.cbDeleteWhere.Items.AddRange(new object[] {
+            "CREATE",
+            "DELETE",
+            "INSERT",
+            "SELECT"});
+            this.cbDeleteWhere.Location = new System.Drawing.Point(22, 7);
+            this.cbDeleteWhere.Name = "cbDeleteWhere";
+            this.cbDeleteWhere.Size = new System.Drawing.Size(121, 21);
+            this.cbDeleteWhere.TabIndex = 6;
             // 
-            // label7
+            // tbDeleteWhere
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(7, 120);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(54, 13);
-            this.label7.TabIndex = 3;
-            this.label7.Text = "NB ATTR";
+            this.tbDeleteWhere.Location = new System.Drawing.Point(181, 8);
+            this.tbDeleteWhere.Name = "tbDeleteWhere";
+            this.tbDeleteWhere.Size = new System.Drawing.Size(100, 20);
+            this.tbDeleteWhere.TabIndex = 6;
             // 
-            // tbNbAttr
+            // panelDeleteWhere
             // 
-            this.tbNbAttr.Location = new System.Drawing.Point(85, 112);
-            this.tbNbAttr.Name = "tbNbAttr";
-            this.tbNbAttr.Size = new System.Drawing.Size(100, 20);
-            this.tbNbAttr.TabIndex = 4;
-            this.tbNbAttr.TextChanged += new System.EventHandler(this.tbNbAttr_TextChanged);
-            // 
-            // panelCREATEattr
-            // 
-            this.panelCREATEattr.AutoScroll = true;
-            this.panelCREATEattr.Location = new System.Drawing.Point(7, 137);
-            this.panelCREATEattr.Name = "panelCREATEattr";
-            this.panelCREATEattr.Size = new System.Drawing.Size(225, 157);
-            this.panelCREATEattr.TabIndex = 5;
-            // 
-            // btnCreate
-            // 
-            this.btnCreate.Location = new System.Drawing.Point(104, 296);
-            this.btnCreate.Name = "btnCreate";
-            this.btnCreate.Size = new System.Drawing.Size(75, 23);
-            this.btnCreate.TabIndex = 5;
-            this.btnCreate.Text = "CREATE";
-            this.btnCreate.UseVisualStyleBackColor = true;
-            this.btnCreate.Click += new System.EventHandler(this.btnCreate_Click);
+            this.panelDeleteWhere.Controls.Add(this.cbDeleteWhere);
+            this.panelDeleteWhere.Controls.Add(this.tbDeleteWhere);
+            this.panelDeleteWhere.Location = new System.Drawing.Point(6, 140);
+            this.panelDeleteWhere.Name = "panelDeleteWhere";
+            this.panelDeleteWhere.Size = new System.Drawing.Size(297, 100);
+            this.panelDeleteWhere.TabIndex = 7;
             // 
             // Form1
             // 
@@ -426,6 +474,8 @@
             this.panelSELECT.ResumeLayout(false);
             this.panelSELECT.PerformLayout();
             this.tabReponse.ResumeLayout(false);
+            this.panelDeleteWhere.ResumeLayout(false);
+            this.panelDeleteWhere.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -465,6 +515,10 @@
         private System.Windows.Forms.TextBox tbCreate;
         private System.Windows.Forms.Panel panelCREATEattr;
         private System.Windows.Forms.Button btnCreate;
+        private System.Windows.Forms.ComboBox cbDeleteWhere;
+        private System.Windows.Forms.Button btnDelete;
+        private System.Windows.Forms.TextBox tbDeleteWhere;
+        private System.Windows.Forms.Panel panelDeleteWhere;
     }
 }
 

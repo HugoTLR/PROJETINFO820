@@ -118,6 +118,7 @@ namespace PROJET820
                     panelCREATE.Visible = true;
                     break;
                 case 1:
+                    InitDeletePanel();
                     panelDELETE.Visible = true;
                     break;
                 case 2:
@@ -127,6 +128,14 @@ namespace PROJET820
                     InitSelectPanel();
                     panelSELECT.Visible = true;
                     break;
+            }
+        }
+        
+        private void InitDeletePanel()
+        {
+            for (int i = 0; i < dataInstance.TablesList.Count; i++)
+            {
+                lbTable2.Items.Add(dataInstance.TablesList.ElementAt(i).Value.Name);
             }
         }
 
@@ -298,6 +307,7 @@ namespace PROJET820
 
             try
             {
+                //Useless
                 while (dr.Read())
                     Console.WriteLine(dr.GetValue(0));
             }
@@ -306,6 +316,59 @@ namespace PROJET820
                 MessageBox.Show(e.Message);
             }
             MessageBox.Show("Table Successfully Created");
+        }
+
+        private void lbTable2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            cbDeleteWhere.Items.Clear();
+            KeyValuePair<string, Table> t = dataInstance.TablesList.ElementAt(lbTable2.SelectedIndex);
+            for (int i = 0; i < t.Value.AttrList.Count; i++)
+            {
+                cbDeleteWhere.Items.Add(t.Value.AttrList.ElementAt(i).Name);
+            }
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            CleanOracle();
+        }
+
+        private void CleanOracle()
+        {
+            OracleCommand cmd = new OracleCommand();
+            cmd.Connection = conn;
+            if(cbDeleteWhole.Checked)
+                cmd.CommandText = "DELETE FROM " + lbTable2.Text;
+            else
+                cmd.CommandText = "DELETE FROM " + lbTable2.Text + " WHERE " + cbDeleteWhere.Text + " " + tbDeleteWhere.Text;
+            
+            cmd.CommandType = CommandType.Text;
+
+            OracleDataReader dr = cmd.ExecuteReader();
+
+            try
+            {
+                //Useless
+                while (dr.Read())
+                    Console.WriteLine(dr.GetValue(0));
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+            MessageBox.Show("Delete successful");
+        }
+
+        private void cbDeleteWhole_CheckedChanged(object sender, EventArgs e)
+        {
+            if(cbDeleteWhole.Checked)
+            {
+                panelDeleteWhere.Hide();
+            }
+            else
+            {
+                panelDeleteWhere.Show();
+            }
         }
     }
 }
